@@ -1,0 +1,13 @@
+<ion-item *ngIf="medicine" [detail]="false" [routerLink]="'/medicine/' + medicine.id">
+  <!--  <div slot="start"></div>-->
+  <ion-label [class]="medicine.expires ? 'expires-text': ''" class="ion-text-wrap">
+    <h2>
+      {{ medicine.name }}
+      <span class="date">
+        <ion-note> <p>Годен до</p> {{ medicine.date_before }}</ion-note>
+        <ion-icon *ngIf="isIos()" aria-hidden="true" name="chevron-forward" size="small"></ion-icon>
+      </span>
+    </h2>
+    <h3>{{ medicine.description }}</h3>
+  </ion-label>
+</ion-item>

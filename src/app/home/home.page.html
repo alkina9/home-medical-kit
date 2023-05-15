@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Мои лекарства
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content">
+  <ion-refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="medium">
+        Мои лекарства
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-label *ngIf="expiresDateMedicine.length !== 0">
+    <h1>Просроченные лекарства</h1>
+    <ion-list>
+      <app-medicine *ngFor="let medicine of expiresDateMedicine" [medicine]="medicine"></app-medicine>
+    </ion-list>
+  </ion-label>
+
+  <ion-label *ngIf="activeMedicine.length !== 0">
+    <h1>Непосроченные лекарства</h1>
+    <ion-list>
+      <app-medicine *ngFor="let medicine of activeMedicine" [medicine]="medicine"></app-medicine>
+    </ion-list>
+  </ion-label>
+</ion-content>
+
+<ion-button color="tertiary" expand="block" id="open-modal">
+  <ion-icon name="add-outline" slot="start"></ion-icon>
+  Добавить
+</ion-button>
+
+
+<ion-modal (willDismiss)="onWillDismiss($event)" trigger="open-modal">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Welcome</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="name" clearInput="true" errorText="Введите название лекарства"
+                   label="Название лекарства" labelPlacement="stacked"
+                   placeholder="Название лекарства" required="true" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="description" label="Описание" labelPlacement="stacked" placeholder="Описание"
+                   type="text"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="date_before" errorText="Введите дату окончания срока годности, указанную на упаковке"
+                   label="Годен до" labelPlacement="stacked" placeholder="Годен до" required="true"
+                   type="date"></ion-input>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
