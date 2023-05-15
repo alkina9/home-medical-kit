@@ -1,0 +1,7 @@
+{
+  "name": "medicine-chest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
