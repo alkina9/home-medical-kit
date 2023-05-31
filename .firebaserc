@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "home-medical-kit-a61be": {
+      "hosting": {
+        "app": [
+          "home-medical-kit-a61be"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "home-medical-kit-a61be"
+  }
+}
