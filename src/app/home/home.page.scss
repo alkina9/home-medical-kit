@@ -4,3 +4,11 @@ ion-content.content {
   --padding-start: 20px;
   --inner-padding-end: 20px;
 }
+
+ion-item-option.ion-option {
+  width: 90px;
+
+  ion-icon {
+    color: black;
+  }
+}

@@ -1,30 +1,28 @@
-import {Component, inject, ViewChild} from '@angular/core';
-import {IonModal, RefresherCustomEvent} from '@ionic/angular';
+import {Component, inject, OnInit} from '@angular/core';
+import {RefresherCustomEvent} from '@ionic/angular';
 
 import {DataService, Medicine} from '../services/data.service';
-import {OverlayEventDetail} from '@ionic/core/components';
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  @ViewChild(IonModal) modal!: IonModal;
-  public name: string = '';
-  public description: string = '';
-  public date_before: string = '';
+export class HomePage implements OnInit {
   private data = inject(DataService);
+  private medicines: Medicine[] = [];
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor() {
   }
 
-  get activeMedicine(): Medicine[] {
-    return this.data.getMedicine().filter(medicine => !medicine.expires);
-  }
-
-  get expiresDateMedicine(): Medicine[] {
-    return this.data.getMedicine().filter(medicine => medicine.expires)
+  ngOnInit() {
+    this.data.getMedicines().pipe(takeUntil(this.destroy$))
+      .subscribe(res => {
+        this.medicines = res;
+      });
   }
 
   refresh(ev: any) {
@@ -33,20 +31,15 @@ export class HomePage {
     }, 3000);
   }
 
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
+  get activeMedicine(): Medicine[] {
+    return this.medicines.filter(medicine => !medicine.expires);
   }
 
-  confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+  get expiresDateMedicine(): Medicine[] {
+    return this.medicines.filter(medicine => medicine.expires)
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      //push array
-      console.log(ev.detail.data);
-      this.data.getMedicine().push({date_before: "", description: "", expires: false, id: 0, name: this.name});
-    }
+  async deleteItem(item: Medicine) {
+    await this.data.deleteMedicament(item);
   }
 }

@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {HomePage} from './home.page';
 import {HomePageRoutingModule} from './home-routing.module';
 import {MedicineComponentModule} from '../medicine/medicine.module';
+import {FormAddMedicamentsComponent} from "../form-add-medicaments/form-add-medicaments.component";
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {MedicineComponentModule} from '../medicine/medicine.module';
     MedicineComponentModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, FormAddMedicamentsComponent]
 })
 export class HomePageModule {
 }

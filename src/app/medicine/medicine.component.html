@@ -1,5 +1,4 @@
 <ion-item *ngIf="medicine" [detail]="false" [routerLink]="'/medicine/' + medicine.id">
-  <!--  <div slot="start"></div>-->
   <ion-label [class]="medicine.expires ? 'expires-text': ''" class="ion-text-wrap">
     <h2>
       {{ medicine.name }}
