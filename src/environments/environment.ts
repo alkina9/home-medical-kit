@@ -7,7 +7,7 @@ import {getAnalytics} from "firebase/analytics";
 
 export const environment = {
   production: false,
-  firebaseConfig: {
+  firebase: {
     apiKey: "AIzaSyBr_kl2CDBoOfG47XAPf9YFPfOlvGMHA8s",
     authDomain: "home-medical-kit-a61be.firebaseapp.com",
     projectId: "home-medical-kit-a61be",
@@ -18,7 +18,7 @@ export const environment = {
   }
 };
 
-const app = initializeApp(environment.firebaseConfig);
+const app = initializeApp(environment.firebase);
 const analytics = getAnalytics(app);
 /*
  * For easier debugging in development mode, you can import the following file
