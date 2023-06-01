@@ -9,10 +9,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {environment} from "../environments/environment";
+import {QRCodeModule} from "angularx-qrcode";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, QRCodeModule, provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())],
   providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],

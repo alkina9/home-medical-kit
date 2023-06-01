@@ -4,6 +4,8 @@ import {RefresherCustomEvent} from '@ionic/angular';
 import {DataService, Medicine} from '../services/data.service';
 import {Subject, takeUntil} from "rxjs";
 
+// import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -41,5 +43,26 @@ export class HomePage implements OnInit {
 
   async deleteItem(item: Medicine) {
     await this.data.deleteMedicament(item);
+  }
+
+  //Barcode
+
+  // async checkPermission()  {
+  //   try {
+  //     // check or request permission
+  //     const status = await BarcodeScanner.checkPermission({ force: true });
+  //
+  //     if (status.granted) {
+  //       // the user granted permission
+  //       return true;
+  //     }
+  //     return false;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
+  startScan() {
+
   }
 }

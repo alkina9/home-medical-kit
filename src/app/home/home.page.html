@@ -48,9 +48,13 @@
   </ion-label>
 </ion-content>
 
-<ion-button color="tertiary" expand="block" id="open-modal">
+<ion-button color="tertiary" expand="block" id="open-modal" class="ion-margin">
   <ion-icon name="add-outline" slot="start"></ion-icon>
   Добавить
+</ion-button>
+<ion-button color="tertiary" expand="block" (click)="startScan()" class="ion-margin">
+  <ion-icon name="add-outline" slot="start"></ion-icon>
+  Сканировать штрих-код
 </ion-button>
 
 <app-form-add-medicaments></app-form-add-medicaments>
