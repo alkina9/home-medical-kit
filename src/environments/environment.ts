@@ -6,10 +6,11 @@ import {getAnalytics} from "firebase/analytics";
 
 
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
     apiKey: "AIzaSyBr_kl2CDBoOfG47XAPf9YFPfOlvGMHA8s",
     authDomain: "home-medical-kit-a61be.firebaseapp.com",
+    databaseURL: "https://home-medical-kit-a61be-default-rtdb.firebaseio.com",
     projectId: "home-medical-kit-a61be",
     storageBucket: "home-medical-kit-a61be.appspot.com",
     messagingSenderId: "337266778035",
