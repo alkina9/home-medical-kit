@@ -13,6 +13,10 @@ export class HomePage implements OnInit {
   private data = inject(DataService);
   private medicines: Medicine[] = [];
 
+  public results: Medicine[] = [];
+  public isSearch: boolean = false;
+
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor() {
@@ -21,7 +25,8 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.data.getMedicines().pipe(takeUntil(this.destroy$))
       .subscribe(res => {
-        this.medicines = res;
+        this.results = res;
+        this.medicines = [...this.results]
       });
   }
 
@@ -42,4 +47,11 @@ export class HomePage implements OnInit {
   async deleteItem(item: Medicine) {
     await this.data.deleteMedicament(item);
   }
+
+  handleInput(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.medicines = this.results.filter((d) => d.name.toLowerCase().indexOf(query) > -1);
+  }
+
+
 }

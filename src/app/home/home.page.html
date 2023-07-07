@@ -1,8 +1,34 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Мои лекарства
-    </ion-title>
+    <ion-grid>
+      <ion-row *ngIf="!isSearch; else search">
+        <ion-col class="ion-text-start">
+          <ion-title>
+            Мои лекарства
+          </ion-title>
+        </ion-col>
+        <ion-col class="ion-text-end">
+          <ion-button fill="clear" (click)="isSearch = true">
+            <ion-icon name="search"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ng-template #search>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="1">
+              <ion-button fill="clear" (click)="isSearch = false">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="11">
+              <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" clear-icon="none"
+                             animated="true"></ion-searchbar>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ng-template>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
@@ -48,9 +74,11 @@
   </ion-label>
 </ion-content>
 
-<ion-button color="tertiary" expand="block" id="open-modal" class="ion-margin">
-  <ion-icon name="add-outline" slot="start"></ion-icon>
-  Добавить
-</ion-button>
+<ion-fab id="open-modal" slot="fixed" horizontal="center" vertical="bottom">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </ion-fab-button>
+</ion-fab>
 
 <app-form-add-medicaments></app-form-add-medicaments>

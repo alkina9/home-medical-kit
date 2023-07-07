@@ -4,6 +4,7 @@ import {DataService, Medicine} from "../services/data.service";
 import {IonModal} from "@ionic/angular";
 import {NgForm} from '@angular/forms';
 import {Subject, takeUntil} from "rxjs";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-form-add-medicaments',
@@ -19,11 +20,24 @@ export class FormAddMedicamentsComponent implements OnInit {
 
   public name: string = '';
   public description: string = '';
-  public date_before: string = '';
+  // public date_before: string = '';
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor() {
+  public date_before: any;
+
+  get date(): any {
+    console.log(this.date_before);
+    return this.date_before;
+  }
+
+  set date(value: any) {
+    console.log(value);
+    value = this.datePipe.transform(value, 'YYYY-MM');
+    this.date_before = value;
+  }
+
+  constructor(private datePipe: DatePipe) {
   }
 
   ngOnInit() {
@@ -37,15 +51,20 @@ export class FormAddMedicamentsComponent implements OnInit {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       //push array
-      let today = new Date().toISOString().slice(0, 10);
+      let month: string | number = new Date().getMonth() + 1;
+      let year = new Date().getFullYear();
+      if (month < 10) {
+        month = `0${month}`;
+      }
+
+      let today = month + "." + year;
       if (this.date_before < today) {
         this.expires = true;
-        console.log(this.expires);
+        console.log(today);
       } else this.expires = false;
 
       console.log(this.date_before >= today);
       const id = Math.random().toString(16).slice(2);
-      this.date_before = new Date(this.date_before).toLocaleDateString();
       console.log(this.date_before)
       this.addMedicament({
         date_before: this.date_before,
@@ -70,5 +89,18 @@ export class FormAddMedicamentsComponent implements OnInit {
   confirm() {
     console.log(this.data.medicines);
     this.modal.dismiss(this.name, 'confirm');
+  }
+
+  pickDateModelChange(dateValue: any): void {
+    console.log('ngModel change triggered');
+    console.log(dateValue);
+
+    //here you need to add your date format function and service call
+  }
+
+  ionChangeEvent(date: string | string[] | null | undefined): void {
+    console.log('ion change event triggered');
+    console.log(date);
+    //here you need to add your date format function and service call
   }
 }
