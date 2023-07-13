@@ -22,12 +22,14 @@ export class FormAddMedicamentsComponent implements OnInit {
   public description: string = '';
   // public date_before: string = '';
 
+  public minDate = '2020-01';
+  public maxDate = new Date().getFullYear() + 7;
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   public date_before: any;
 
   get date(): any {
-    console.log(this.date_before);
     return this.date_before;
   }
 
@@ -35,6 +37,17 @@ export class FormAddMedicamentsComponent implements OnInit {
     console.log(value);
     value = this.datePipe.transform(value, 'YYYY-MM');
     this.date_before = value;
+  }
+
+  get today(): string {
+    let month: string | number = new Date().getMonth() + 1;
+    let year = new Date().getFullYear();
+    if (month < 10) {
+      month = `0${month}`;
+    }
+
+    let today = year + "-" + month;
+    return today;
   }
 
   constructor(private datePipe: DatePipe) {
@@ -51,21 +64,14 @@ export class FormAddMedicamentsComponent implements OnInit {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       //push array
-      let month: string | number = new Date().getMonth() + 1;
-      let year = new Date().getFullYear();
-      if (month < 10) {
-        month = `0${month}`;
-      }
-
-      let today = month + "." + year;
-      if (this.date_before < today) {
+      if (this.date_before < this.today) {
         this.expires = true;
-        console.log(today);
       } else this.expires = false;
 
-      console.log(this.date_before >= today);
+      console.log(this.date_before >= this.today);
       const id = Math.random().toString(16).slice(2);
-      console.log(this.date_before)
+      console.log(this.date_before);
+      console.log(this.today);
       this.addMedicament({
         date_before: this.date_before,
         description: this.description,

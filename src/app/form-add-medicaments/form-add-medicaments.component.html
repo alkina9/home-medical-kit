@@ -24,7 +24,7 @@
                      type="text"></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-input name="date_before" value="{{ date | date: 'MM.yyyy' }}"
+          <ion-input name="date_before" value="{{ (date || today) | date: 'MM.yyyy' }}"
                      errorText="Введите дату окончания срока годности, указанную на упаковке"
                      label="Годен до" labelPlacement="stacked" placeholder="31.2025" required="true"
                      id="date_before">
@@ -43,11 +43,11 @@
                 [(ngModel)]="date"
                 (ngModelChange)="pickDateModelChange($event)"
                 (ionChange)="ionChangeEvent(popoverDatetime.value)"
+                [min]="minDate"
+                [max]="maxDate"
               ></ion-datetime>
             </ng-template>
           </ion-popover>
-
-          {{date}}
         </ion-item>
 
       </ion-content>

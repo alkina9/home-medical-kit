@@ -1,5 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {RefresherCustomEvent} from '@ionic/angular';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import {IonSearchbar, RefresherCustomEvent} from '@ionic/angular';
 
 import {DataService, Medicine} from '../services/data.service';
 import {Subject, takeUntil} from "rxjs";
@@ -10,6 +10,8 @@ import {Subject, takeUntil} from "rxjs";
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild('searchbar', {static: false}) searchbar?: IonSearchbar;
+
   private data = inject(DataService);
   private medicines: Medicine[] = [];
 
@@ -53,5 +55,16 @@ export class HomePage implements OnInit {
     this.medicines = this.results.filter((d) => d.name.toLowerCase().indexOf(query) > -1);
   }
 
+  openSearch(): void {
+    this.isSearch = true;
+    setTimeout(() => {
+      this.searchbar?.setFocus();
+    }, 150);
+  }
+
+  closeSearch(): void {
+    this.isSearch = false;
+    this.medicines = [...this.results];
+  }
 
 }

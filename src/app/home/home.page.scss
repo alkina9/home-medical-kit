@@ -31,3 +31,7 @@ ion-item-option.ion-option {
   height: 120px;
   border-radius: 50%;
 }
+
+ion-searchbar.ion-search {
+  --box-shadow: none;
+}
