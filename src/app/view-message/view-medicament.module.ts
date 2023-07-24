@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {ViewMessagePage} from './view-message.page';
+import {ViewMedicamentPage} from './view-medicament.page';
 
 import {IonicModule} from '@ionic/angular';
 
-import {ViewMessagePageRoutingModule} from './view-message-routing.module';
+import {ViewMessagePageRoutingModule} from './view-medicament-routing.module';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import {ViewMessagePageRoutingModule} from './view-message-routing.module';
     IonicModule,
     ViewMessagePageRoutingModule
   ],
-  declarations: [ViewMessagePage]
+  declarations: [ViewMedicamentPage]
 })
-export class ViewMessagePageModule {
+export class ViewMedicamentPageModule {
 }

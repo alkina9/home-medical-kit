@@ -1,4 +1,4 @@
-<ion-item *ngIf="medicine" [detail]="false" [routerLink]="'/medicine/' + medicine.id">
+<ion-item *ngIf="medicine" [detail]="false" [button]="true" (click)="openModal()">
   <ion-label [class]="medicine.expires ? 'expires-text': ''" class="ion-text-wrap">
     <h2>
       {{ medicine.name }}

@@ -5,11 +5,16 @@ import {DataService, Medicine} from '../services/data.service';
 
 @Component({
   selector: 'app-view-medicine',
-  templateUrl: './view-message.page.html',
-  styleUrls: ['./view-message.page.scss'],
+  templateUrl: './view-medicament.page.html',
+  styleUrls: ['./view-medicament.page.scss'],
 })
-export class ViewMessagePage implements OnInit {
-  public message!: Medicine;
+export class ViewMedicamentPage implements OnInit {
+  public medicine!: Medicine;
+  public name: string = '';
+  public description: string = '';
+  public minDate = '2020-01';
+  public maxDate = new Date().getFullYear() + 7;
+
   private data = inject(DataService);
   private activatedRoute = inject(ActivatedRoute);
   private platform = inject(Platform);
@@ -19,11 +24,11 @@ export class ViewMessagePage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.message = this.data.getMedicineById(parseInt(id, 10));
+    this.medicine = this.data.getMedicineById(parseInt(id, 10));
   }
 
-  getBackButtonText() {
-    const isIos = this.platform.is('ios')
-    return isIos ? 'Inbox' : '';
-  }
+  // getBackButtonText() {
+  //   const isIos = this.platform.is('ios')
+  //   return isIos ? 'Inbox' : '';
+  // }
 }
