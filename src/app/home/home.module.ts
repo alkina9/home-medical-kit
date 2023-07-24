@@ -5,18 +5,19 @@ import {FormsModule} from '@angular/forms';
 
 import {HomePage} from './home.page';
 import {HomePageRoutingModule} from './home-routing.module';
-import {MedicineComponentModule} from '../medicine/medicine.module';
-import {FormAddMedicamentsComponent} from "../form-add-medicaments/form-add-medicaments.component";
+import {FormAddMedicamentsModule} from "../form-add-medicaments/from-add-medicaments.module";
+import {MedicineComponentModule} from "../medicine/medicine.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MedicineComponentModule,
     HomePageRoutingModule,
+    FormAddMedicamentsModule,
+    MedicineComponentModule
   ],
-  declarations: [HomePage, FormAddMedicamentsComponent],
+  declarations: [HomePage],
   providers: [
     DatePipe,
   ],
